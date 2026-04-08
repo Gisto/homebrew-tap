@@ -6,7 +6,7 @@ class Gisto < Formula
   on_macos do
     if Hardware::CPU.arm?
       url "https://github.com/Gisto/Gisto/releases/download/v2.7.0/Gisto_aarch64.app.tar.gz"
-      sha256 "295e62a7588d4aad6eb2d9684cba51e58b0795fb3cd472112b46a3f0f1bd62c7"
+      sha256 "3564d29b36510b0f24e1b4c66eca4ff6d36b1456d74b62cf2afd8ae1fdf0a89a"
     else
       url "https://github.com/Gisto/Gisto/releases/download/v2.7.0/Gisto_x64.app.tar.gz"
       sha256 "046c13715da5baec845ae564b5b6cf9ab4aa0feec1a9d812d8c7aa08f35e74a0"
@@ -29,7 +29,8 @@ class Gisto < Formula
   def post_install
     return unless OS.mac?
 
-    appdir = HOMEBREW_PREFIX/"Applications"
+    # Copy to /Applications (standard macOS location)
+    appdir = Pathname.new("/Applications")
     appdir.mkpath unless appdir.exist?
     return if (appdir/"Gisto.app").exist?
 
