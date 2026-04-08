@@ -14,12 +14,15 @@ class Gisto < Formula
   end
 
   def install
-    # Handle both potential structures from tarball
+    # Workaround: unpack manually to handle any structure
+    system "tar", "-xf", cached_download, "-C", buildpath
+    
+    # Handle whatever structure we got
     if (buildpath/"Gisto.app").exist?
-      (buildpath/"Gisto.app").rename(prefix/"Gisto.app")
+      FileUtils.mv (buildpath/"Gisto.app"), prefix/"Gisto.app"
     elsif (buildpath/"Contents").exist?
-      # Create Gisto.app wrapper if Contents is at root
-      (buildpath/"Contents").rename(prefix/"Gisto.app/Contents")
+      (prefix/"Gisto.app").mkpath
+      FileUtils.mv (buildpath/"Contents"), prefix/"Gisto.app/Contents"
     end
   end
 
