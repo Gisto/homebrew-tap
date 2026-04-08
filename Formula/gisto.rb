@@ -26,6 +26,16 @@ class Gisto < Formula
     end
   end
 
+  def post_install
+    return unless OS.mac?
+
+    appdir = HOMEBREW_PREFIX/"Applications"
+    appdir.mkpath unless appdir.exist?
+    return if (appdir/"Gisto.app").exist?
+
+    cp_r "#{prefix}/Gisto.app", appdir
+  end
+
   def caveats
     <<~EOS
       Gisto is not code-signed. On macOS, you may need to run:
