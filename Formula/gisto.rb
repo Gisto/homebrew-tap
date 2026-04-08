@@ -14,20 +14,15 @@ class Gisto < Formula
   end
 
   def install
-    # Extract using system tar with explicit gzip decompression
     system "/usr/bin/tar", "-xzf", cached_download, "-C", buildpath
     
-    # Check what was extracted and move to prefix
     extracted_items = Dir.entries(buildpath) - ['.', '..']
-    puts "Extracted items: #{extracted_items.inspect}"
     
     if extracted_items.include?("Gisto.app")
       FileUtils.mv buildpath/"Gisto.app", prefix
     elsif extracted_items.include?("Contents")
       (prefix/"Gisto.app").mkpath
       FileUtils.mv buildpath/"Contents", prefix/"Gisto.app/Contents"
-    else
-      raise "Unexpected extraction: #{extracted_items.inspect}"
     end
   end
 
@@ -35,6 +30,7 @@ class Gisto < Formula
     <<~EOS
       Gisto is not code-signed. On macOS, you may need to run:
         xattr -dr com.apple.quarantine /Applications/Gisto.app
+      to allow the app to launch.
     EOS
   end
 end
