@@ -1,15 +1,15 @@
 class Gisto < Formula
   desc "Cross-platform snippets management desktop application"
   homepage "https://github.com/Gisto/Gisto"
-  version "2.6.2"
+  version ""
 
   on_macos do
     if Hardware::CPU.arm?
-      url "https://github.com/Gisto/Gisto/releases/download/v2.6.2/Gisto_aarch64.app.tar.gz"
-      sha256 "a6e2d3fb8ac358faab2246c91c3ba2928ab725fb229c827f289fca8340ad10c5"
+      url "https://github.com/Gisto/Gisto/releases/download/v/Gisto_aarch64.app.tar.gz"
+      sha256 "0019dfc4b32d63c1392aa264aed2253c1e0c2fb09216f8e2cc269bbfb8bb49b5"
     else
-      url "https://github.com/Gisto/Gisto/releases/download/v2.6.2/Gisto_x64.app.tar.gz"
-      sha256 "386c6a15db13f8f0cc98b80efb316fe2d7ccdda3ca05a78ad3a45b06bb6d9958"
+      url "https://github.com/Gisto/Gisto/releases/download/v/Gisto_x64.app.tar.gz"
+      sha256 "0019dfc4b32d63c1392aa264aed2253c1e0c2fb09216f8e2cc269bbfb8bb49b5"
     end
   end
 
