@@ -14,15 +14,16 @@ class Gisto < Formula
   end
 
   def install
-    # Workaround: unpack manually to handle any structure
-    system "tar", "-xf", cached_download, "-C", buildpath
-    
-    # Handle whatever structure we got
+    # Handle whatever structure we got from the tarball
     if (buildpath/"Gisto.app").exist?
       FileUtils.mv (buildpath/"Gisto.app"), prefix/"Gisto.app"
     elsif (buildpath/"Contents").exist?
       (prefix/"Gisto.app").mkpath
       FileUtils.mv (buildpath/"Contents"), prefix/"Gisto.app/Contents"
+    else
+      puts "DEBUG: Contents of buildpath:"
+      system "ls", "-laR", buildpath.to_s
+      raise "Could not find Gisto.app or Contents in build directory"
     end
   end
 
