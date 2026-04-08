@@ -6,10 +6,10 @@ class Gisto < Formula
   on_macos do
     if Hardware::CPU.arm?
       url "https://github.com/Gisto/Gisto/releases/download/v2.7.0/Gisto_aarch64.app.tar.gz"
-      sha256 "5503a126654ef3c4559ac90c90326368b653d1b3f05bc7f56dfcca6fb0a1ed73"
+      sha256 "295e62a7588d4aad6eb2d9684cba51e58b0795fb3cd472112b46a3f0f1bd62c7"
     else
       url "https://github.com/Gisto/Gisto/releases/download/v2.7.0/Gisto_x64.app.tar.gz"
-      sha256 "6cba1cb21deb1f3a0812e06ac3c106f648d8e2b48ef0dfdce958f11f15ebc187"
+      sha256 "046c13715da5baec845ae564b5b6cf9ab4aa0feec1a9d812d8c7aa08f35e74a0"
     end
   end
 
