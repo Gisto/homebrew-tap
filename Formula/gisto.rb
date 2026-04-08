@@ -14,9 +14,13 @@ class Gisto < Formula
   end
 
   def install
-    # The tarball unpacks to Contents/ (not in Gisto.app folder on modern macOS)
-    # Rename to Gisto.app and install
-    (buildpath/"Gisto.app").rename(prefix/"Gisto.app")
+    # Handle both potential structures from tarball
+    if (buildpath/"Gisto.app").exist?
+      (buildpath/"Gisto.app").rename(prefix/"Gisto.app")
+    elsif (buildpath/"Contents").exist?
+      # Create Gisto.app wrapper if Contents is at root
+      (buildpath/"Contents").rename(prefix/"Gisto.app/Contents")
+    end
   end
 
   def post_install
