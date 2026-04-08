@@ -6,10 +6,10 @@ class Gisto < Formula
   on_macos do
     if Hardware::CPU.arm?
       url "https://github.com/Gisto/Gisto/releases/download/v2.7.0/Gisto_aarch64.app.tar.gz"
-      sha256 "3564d29b36510b0f24e1b4c66eca4ff6d36b1456d74b62cf2afd8ae1fdf0a89a"
+      sha256 "e862dab8a19d82d99cbc8ffee5128f02657f78470dffc280208a75489fa507a1"
     else
       url "https://github.com/Gisto/Gisto/releases/download/v2.7.0/Gisto_x64.app.tar.gz"
-      sha256 "046c13715da5baec845ae564b5b6cf9ab4aa0feec1a9d812d8c7aa08f35e74a0"
+      sha256 "58c646e2ba101fdc93b549f1f01c309cdb5521aeb8533cd06bb6f551752fe4d4"
     end
   end
 
@@ -26,20 +26,16 @@ class Gisto < Formula
     end
   end
 
-  def post_install
-    return unless OS.mac?
-
-    # Copy to /Applications (standard macOS location)
-    appdir = Pathname.new("/Applications")
-    appdir.mkpath unless appdir.exist?
-    return if (appdir/"Gisto.app").exist?
-
-    cp_r "#{prefix}/Gisto.app", appdir
-  end
-
   def caveats
     <<~EOS
-      Gisto is not code-signed. On macOS, you may need to run:
+      Gisto has been installed to:
+        /opt/homebrew/Cellar/gisto/#{version}/Gisto.app
+      
+      To use Gisto, you can:
+        - Open /Applications/Gisto.app (you may need to copy it first)
+        - Or run directly from Cellar: open /opt/homebrew/Cellar/gisto/#{version}/Gisto.app
+      
+      Note: Gisto is not code-signed. On macOS, you may need to run:
         xattr -dr com.apple.quarantine /Applications/Gisto.app
       to allow the app to launch.
     EOS
