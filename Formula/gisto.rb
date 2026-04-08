@@ -14,7 +14,9 @@ class Gisto < Formula
   end
 
   def install
-    prefix.install "Gisto.app"
+    # The tarball unpacks to Contents/ (not in Gisto.app folder on modern macOS)
+    # Rename to Gisto.app and install
+    (buildpath/"Gisto.app").rename(prefix/"Gisto.app")
   end
 
   def post_install
